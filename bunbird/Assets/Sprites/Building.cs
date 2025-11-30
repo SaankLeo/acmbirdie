@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Brick : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class Brick : MonoBehaviour
 
             // Destroy this block
             Destroy(gameObject);
+
         }
     }
+
 }

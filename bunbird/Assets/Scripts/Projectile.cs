@@ -1,5 +1,8 @@
 ﻿using System.Collections;
+using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Projectile : MonoBehaviour
 {
@@ -16,11 +19,13 @@ public class Projectile : MonoBehaviour
     // We changed "Building" to "EnableBuildingDynamics"
     public EnableBuildingDynamics buildingPhysicsScript;
     // -----------------------
+    private ScoreManage scoreManageScript;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         springJoint = GetComponent<SpringJoint2D>();
+        scoreManageScript = FindObjectOfType<ScoreManage>();
     }
 
     void Update()
@@ -60,5 +65,11 @@ public class Projectile : MonoBehaviour
         {
             buildingPhysicsScript.OnProjectileLaunched();
         }
+
+
+        yield return new WaitForSeconds(4f);
+        Destroy(this.gameObject);
+        scoreManageScript.InstantiatePlayer();
+
     }
 }
